@@ -1,0 +1,33 @@
+USE master;
+GO
+
+IF DB_ID('jwt_nimbus') IS NULL
+BEGIN
+    CREATE DATABASE jwt_nimbus;
+END
+GO
+
+USE jwt_nimbus;
+GO
+
+IF OBJECT_ID('dbo.users', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.users
+    (
+        id INT IDENTITY(1,1) PRIMARY KEY,
+
+        full_name NVARCHAR(100) NOT NULL,
+
+        email NVARCHAR(150) NOT NULL,
+
+        password NVARCHAR(255) NOT NULL,
+
+        created_at DATETIME2 NOT NULL
+            CONSTRAINT DF_users_created_at DEFAULT SYSDATETIME(),
+
+        updated_at DATETIME2 NULL,
+
+        CONSTRAINT UQ_users_email UNIQUE(email)
+    );
+END
+GO

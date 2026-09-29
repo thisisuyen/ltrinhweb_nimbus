@@ -1,0 +1,24 @@
+package vn.iotstar.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import vn.iotstar.entity.User;
+import vn.iotstar.repository.UserRepository;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public UserService(
+            UserRepository userRepository) {
+
+        this.userRepository = userRepository;
+    }
+
+    public List<User> allUsers() {
+        return userRepository.findAll();
+    }
+}
